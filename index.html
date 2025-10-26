@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Terminal Flood Tools</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --bg:#0b1020; --ink:#e5e7eb; --muted:#9ca3af; --accent:#60a5fa; --tab:#111827; }
+    html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif; }
+    .wrap { max-width:1400px; margin:0 auto; padding:18px; }
+    h1 { margin:0 0 12px; font-size:24px; font-weight:800; letter-spacing:.2px; }
+    .sub { color:var(--muted); margin-bottom:12px }
+    .tabs { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+    .tab {
+      background:var(--tab); color:#cbd5e1; border:1px solid #223; border-radius:999px;
+      padding:10px 14px; cursor:pointer; font-weight:700; font-size:14px;
+      transition: all .15s ease;
+    }
+    .tab.active { background:linear-gradient(180deg,#1f2937,#0f172a); color:#fff; border-color:#334; box-shadow:0 4px 14px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06); }
+    .panel { display:none; border:1px solid #223; border-radius:14px; overflow:hidden; background:#0c1325; }
+    .panel.active { display:block; }
+    iframe { width:100%; height:88vh; border:0; background:#0c1325; }
+    .hint { color:var(--muted); font-size:13px; margin:8px 0 14px }
+    a { color:var(--accent); text-decoration:none }
+    .small { font-size:12px; color:#aeb4bf }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Terminal Flood Tools</h1>
+    <div class="sub">Explore three views: <b>Raise DEM</b> editor (upload masks), <b>3D Flood Simulation</b> (manual slider), and a <b>Dual Map</b> with King Tide/Noah overlay.</div>
+
+    <div class="tabs">
+      <button class="tab active" data-target="p1">1) Raise DEM (upload masks)</button>
+      <button class="tab" data-target="p2">2) 3D Flood Simulation (manual slider)</button>
+      <button class="tab" data-target="p3">3) Dual Map (King Tide / Noah)</button>
+    </div>
+
+    <div class="hint small">Tip: first load of each tab may take a moment while assets initialize.</div>
+
+    <div id="p1" class="panel active">
+      <iframe data-src="raise-dem/index.html" title="Raise DEM"></iframe>
+    </div>
+    <div id="p2" class="panel">
+      <iframe data-src="simulation/index.html" title="3D Flood Simulation"></iframe>
+    </div>
+    <div id="p3" class="panel">
+      <iframe data-src="map/index.html" title="Dual Map"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const panels = Array.from(document.querySelectorAll('.panel'));
+    function activate(id){
+      tabs.forEach(t=>t.classList.toggle('active', t.dataset.target===id));
+      panels.forEach(p=>{
+        const on = p.id===id;
+        p.classList.toggle('active', on);
+        if (on) {
+          const iframe = p.querySelector('iframe');
+          if (iframe && !iframe.src) iframe.src = iframe.dataset.src; // lazy-load
+        }
+      });
+    }
+    tabs.forEach(t=>t.addEventListener('click', ()=>activate(t.dataset.target)));
+    // kick off first iframe
+    document.querySelector('#p1 iframe').src = document.querySelector('#p1 iframe').dataset.src;
+  </script>
+</body>
+</html>
