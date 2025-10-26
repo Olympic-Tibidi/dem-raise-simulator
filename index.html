@@ -48,7 +48,94 @@
       <iframe data-src="map/index.html" title="Dual Map"></iframe>
     </div>
   </div>
+<style>
+/* === General Theme: Softened Dark Slate === */
+body {
+  background: #eaeef3;          /* lightened background */
+  color: #1b1f23;               /* dark slate text */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
 
+/* Cards / Containers */
+.card, .box, .results-container {
+  background: rgba(255, 255, 255, 0.9); /* translucent white cards */
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid #d0d7de;
+  padding: 1rem;
+}
+
+/* Tab Buttons */
+.nav-tabs .nav-link {
+  background: #f4f6f8;
+  border: 1px solid #c9d1d9;
+  color: #333;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.nav-tabs .nav-link:hover {
+  background: #dbe2ea;
+}
+.nav-tabs .nav-link.active {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+/* Headings */
+h1, h2, h3 {
+  color: #1b1f23;
+  font-weight: 700;
+}
+h4, h5, h6 {
+  color: #2f3742;
+  font-weight: 600;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+  background: #fff;
+}
+th, td {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+}
+th {
+  background: #f0f4f8;
+  color: #333;
+}
+
+/* Plotly charts: white background */
+.js-plotly-plot .plotly {
+  background-color: #ffffff !important;
+}
+
+/* Scrollbars (optional soft gray) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c1c7cd;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a7b1bb;
+}
+
+/* Accent Info Box */
+.info-tip {
+  background: #f7fafc;
+  border-left: 4px solid #2563eb;
+  color: #1e3a8a;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+</style>
   <script>
     const tabs = Array.from(document.querySelectorAll('.tab'));
     const panels = Array.from(document.querySelectorAll('.panel'));
